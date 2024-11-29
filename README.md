@@ -114,15 +114,3 @@ source ./scripts/run.sh --ngrok
 ```
 
 ### 3. Go to: `http://0.0.0.0:7860/` or Ngrok link after setup completed
-
-## 🎯 Todo
-
-- [x] Add evaluation.
-- [x] Better Document Processing.
-- [ ] Support better Embedding Model for Vietnamese and other languages.
-- [ ] ReAct Agent.
-- [ ] Document mangement (Qrdant, MongoDB,...)
-
-## 🌟 Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=datvodinh/rag-chatbot&type=Date)](https://star-history.com/#datvodinh/rag-chatbot&Date)
