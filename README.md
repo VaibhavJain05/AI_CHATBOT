@@ -40,7 +40,7 @@
 ### 2.1. Clone project
 
 ```bash
-https://github.com/VaibhavJain05/AI_CHATBOT.git
+git clone https://github.com/VaibhavJain05/AI_CHATBOT.git
 cd rag-chatbot
 ```
 
