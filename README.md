@@ -41,7 +41,7 @@
 
 ```bash
 git clone https://github.com/VaibhavJain05/AI_CHATBOT.git
-cd rag-chatbot
+cd AI_CHATBOT
 ```
 
 ### 2.2 Install
