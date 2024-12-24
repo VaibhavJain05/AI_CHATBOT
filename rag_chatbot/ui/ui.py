@@ -118,6 +118,7 @@ class LocalChatbotUI:
                 message["text"], chatbot, response
             ):
                 yield m
+            for s in response.sources: yield s
             sys.stdout = console
 
     def _get_confirm_pull_model(self, model: str):
