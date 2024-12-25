@@ -62,20 +62,25 @@ class LLMResponse:
         response: StreamingAgentChatResponse,
     ):
         answer = []
-        sources = response.sources
+        
         for text in response.response_gen:
             answer.append(text)
+            sources = [
+                f"Source: {source.node.text}" for source in response.source_nodes
+            ]
+            print("Sources in Progress:", sources)  # Debug print
             yield (
                 DefaultElement.DEFAULT_MESSAGE,
-                history + [[message, f"{''.join(answer)}\n\nSources: {sources}"]],
+                history + [[message, "".join(answer), "\n".join(sources)]],
                 DefaultElement.ANSWERING_STATUS,
             )
+        sources = [f"Source: {source.node.text}" for source in response.source_nodes]
+        print("Final Sources:", sources)  # Debug print
         yield (
             DefaultElement.DEFAULT_MESSAGE,
-            history + [[message, f"{''.join(answer)}\n\nSources: {sources}"]],
+            history + [[message, "".join(answer), "\n".join(sources)]],
             DefaultElement.COMPLETED_STATUS,
         )
-
 
 
 class LocalChatbotUI:
@@ -116,6 +121,12 @@ class LocalChatbotUI:
             console = sys.stdout
             sys.stdout = self._logger
             response = self._pipeline.query(chat_mode, message["text"], chatbot)
+            
+            # Debugging: Print response source nodes
+            print("Response Source Nodes:")
+            for source in response.source_nodes:
+                print(source.node.text)  # or any other property you want to inspect
+            
             for m in self._llm_response.stream_response(
                 message["text"], chatbot, response
             ):

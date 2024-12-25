@@ -109,9 +109,7 @@ class LocalRAGPipeline:
                 history.append(ChatMessage(role=MessageRole.ASSISTANT, content=chat[1]))
         return history
 
-    def query(
-        self, mode: str, message: str, chatbot: list[list[str]]
-    ) -> StreamingAgentChatResponse:
+    def query(self, mode: str, message: str, chatbot: list[list[str]]):
         if mode == "chat":
             history = self.get_history(chatbot)
             response = self._query_engine.stream_chat(message, history)
@@ -119,10 +117,11 @@ class LocalRAGPipeline:
             self._query_engine.reset()
             response = self._query_engine.stream_chat(message)
 
-        # Extract sources from the response metadata if available
-        sources = getattr(response, "metadata", {}).get("sources", "Unknown")
-        return StreamingAgentChatResponse(
-            response_gen=response.response_gen,
-            sources=sources
-        )
+        # Debug: Log or print the sources
+        print("Sources from Pipeline Query:")
+        for source in response.source_nodes:
+            print(source.node.text)
+
+        return response
+
 
