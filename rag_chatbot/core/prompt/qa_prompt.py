@@ -14,7 +14,7 @@ SYSTEM_PROMPT_EN = """\
 This is a chat between a user and an artificial intelligence assistant. \
 The assistant gives helpful, detailed, and polite answers to the user's questions based on the context. \
 The assistant should also indicate when the answer cannot be found in the context. \
-If the answer is derived from the context, the assistant must specify the source or include an excerpt from the relevant document."""
+"""
 
 SYSTEM_PROMPT_RAG_EN = """\
 This is a chat between a user and an artificial intelligence assistant. \
