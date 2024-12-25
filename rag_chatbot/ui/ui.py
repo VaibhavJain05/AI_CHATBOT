@@ -62,18 +62,20 @@ class LLMResponse:
         response: StreamingAgentChatResponse,
     ):
         answer = []
+        sources = response.sources
         for text in response.response_gen:
             answer.append(text)
             yield (
                 DefaultElement.DEFAULT_MESSAGE,
-                history + [[message, "".join(answer)]],
+                history + [[message, f"{''.join(answer)}\n\nSources: {sources}"]],
                 DefaultElement.ANSWERING_STATUS,
             )
         yield (
             DefaultElement.DEFAULT_MESSAGE,
-            history + [[message, "".join(answer)]],
+            history + [[message, f"{''.join(answer)}\n\nSources: {sources}"]],
             DefaultElement.COMPLETED_STATUS,
         )
+
 
 
 class LocalChatbotUI:

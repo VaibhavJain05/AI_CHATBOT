@@ -114,7 +114,15 @@ class LocalRAGPipeline:
     ) -> StreamingAgentChatResponse:
         if mode == "chat":
             history = self.get_history(chatbot)
-            return self._query_engine.stream_chat(message, history)
+            response = self._query_engine.stream_chat(message, history)
         else:
             self._query_engine.reset()
-            return self._query_engine.stream_chat(message)
+            response = self._query_engine.stream_chat(message)
+
+        # Extract sources from the response metadata if available
+        sources = getattr(response, "metadata", {}).get("sources", "Unknown")
+        return StreamingAgentChatResponse(
+            response_gen=response.response_gen,
+            sources=sources
+        )
+
