@@ -40,8 +40,8 @@
 ### 2.1. Clone project
 
 ```bash
-git clone https://github.com/datvodinh/rag-chatbot.git
-cd rag-chatbot
+git clone --branch main https://github.com/VaibhavJain05/AI_CHATBOT.git
+cd AI_CHATBOT
 ```
 
 ### 2.2 Install
